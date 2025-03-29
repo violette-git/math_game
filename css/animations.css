@@ -1,0 +1,331 @@
+/**
+ * Math Adventure: Number Quest
+ * Animation styles for enhanced visual feedback and transitions
+ */
+
+/* ===== Animation Keyframes ===== */
+
+/* Fade In */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Fade Out */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Slide In from Right */
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* Slide Out to Right */
+@keyframes slideOutRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+/* Slide In from Left */
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Slide Out to Left */
+@keyframes slideOutLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* Slide Up */
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Slide Down */
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Pulse */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Bounce */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Wiggle */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+/* Shake */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* Pop */
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Spin */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Celebration - Stars */
+@keyframes celebrationStar {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scale(1.5) rotate(360deg); opacity: 0; }
+}
+
+/* Number Bounce */
+@keyframes numberBounce {
+  0% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(-30px) scale(1.2); }
+  60% { transform: translateY(-30px) scale(1.2); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Correct Answer Flash */
+@keyframes correctFlash {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(126, 217, 87, 0.3); }
+}
+
+/* Incorrect Answer Flash */
+@keyframes incorrectFlash {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(255, 107, 107, 0.3); }
+}
+
+/* Progress Bar Fill */
+@keyframes progressFill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Character Wave */
+@keyframes characterWave {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(20deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(20deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ===== Animation Classes ===== */
+
+/* Basic Animations */
+.fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+.fade-out {
+  animation: fadeOut var(--transition-normal) forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight var(--transition-normal) forwards;
+}
+
+.slide-out-right {
+  animation: slideOutRight var(--transition-normal) forwards;
+}
+
+.slide-in-left {
+  animation: slideInLeft var(--transition-normal) forwards;
+}
+
+.slide-out-left {
+  animation: slideOutLeft var(--transition-normal) forwards;
+}
+
+.slide-up {
+  animation: slideUp var(--transition-normal) forwards;
+}
+
+.slide-down {
+  animation: slideDown var(--transition-normal) forwards;
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+.wiggle {
+  animation: wiggle 1s infinite;
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+.pop {
+  animation: pop 0.3s forwards;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Screen Transitions */
+.screen.transition-in {
+  animation: fadeIn 0.5s forwards;
+}
+
+.screen.transition-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+/* Button Animations */
+.primary-button:hover {
+  animation: pulse 0.5s;
+}
+
+/* Character Animations */
+.character-helper.waving .character-arm {
+  animation: characterWave 2s infinite;
+  transform-origin: right top;
+}
+
+.character-option:hover {
+  animation: pulse 0.5s;
+}
+
+.character-option.selected {
+  animation: pop 0.3s;
+}
+
+/* World and Level Animations */
+.world:hover {
+  animation: pulse 0.5s;
+}
+
+.level:not(.locked):hover {
+  animation: pulse 0.5s;
+}
+
+/* Activity Animations */
+.number-display {
+  animation: pop 0.5s;
+}
+
+.answer-option:hover {
+  animation: pulse 0.3s;
+}
+
+.answer-option.selected {
+  animation: pop 0.3s;
+}
+
+.feedback.correct {
+  animation: correctFlash 1s;
+}
+
+.feedback.incorrect {
+  animation: incorrectFlash 1s, shake 0.5s;
+}
+
+/* Reward Animations */
+.star.earned {
+  animation: celebrationStar 1s forwards;
+}
+
+.celebration-animation .confetti {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Progress Animations */
+.progress-fill.animate {
+  animation: progressFill 1s forwards;
+}
+
+/* Number Animations */
+.animated-number {
+  animation: numberBounce 1s;
+}
+
+.math-symbol {
+  animation: pop 0.5s;
+}
+
+/* Loading Animation */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Helper Animations */
+.hint-bubble {
+  animation: pop 0.5s, float 3s ease-in-out infinite;
+}
+
+/* Celebration Effects */
+.celebration-effect {
+  position: absolute;
+  pointer-events: none;
+}
+
+.celebration-star {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url('../assets/images/ui/star.png');
+  background-size: contain;
+  animation: celebrationStar 1.5s forwards;
+}
+
+.celebration-confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animation Delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Animation Speeds */
+.speed-fast { animation-duration: 0.3s; }
+.speed-normal { animation-duration: 0.5s; }
+.speed-slow { animation-duration: 1s; }

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Math Adventure: Number Quest</title>
+    <meta name="description" content="An educational math game for children aged 2-7 years">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <!-- Preload key assets -->
+    <link rel="preload" href="js/main.js" as="script">
+    <link rel="preload" href="js/audio.js" as="script">
+    <link rel="preload" href="js/animations.js" as="script">
+    <link rel="preload" href="js/ui.js" as="script">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/ui/favicon.png">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen">
+            <div class="loading-content">
+                <div class="game-logo">
+                    <img src="assets/images/ui/game-logo.png" alt="Math Adventure: Number Quest" class="logo-image">
+                </div>
+                <div class="loading-animation">
+                    <div class="loading-spinner"></div>
+                </div>
+                <p>Loading...</p>
+            </div>
+        </div>
+
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen hidden">
+            <div class="screen-content">
+                <div class="game-logo">
+                    <img src="assets/images/ui/game-logo.png" alt="Math Adventure: Number Quest" class="logo-image">
+                </div>
+                
+                <div class="character-selection">
+                    <h3>Choose Your Character</h3>
+                    <div class="character-options">
+                        <!-- Character options will be dynamically generated -->
+                    </div>
+                </div>
+                
+                <div class="main-menu">
+                    <button id="play-button" class="primary-button">
+                        <img src="assets/images/ui/play-icon.png" alt="" class="button-icon">
+                        <span>Play</span>
+                    </button>
+                    <button id="settings-button" class="secondary-button">
+                        <img src="assets/images/ui/settings-icon.png" alt="" class="button-icon">
+                        <span>Settings</span>
+                    </button>
+                    <button id="parent-zone-button" class="secondary-button">
+                        <img src="assets/images/ui/parent-icon.png" alt="" class="button-icon">
+                        <span>Parent Zone</span>
+                    </button>
+                </div>
+                
+                <div class="audio-controls">
+                    <button id="music-toggle" class="audio-button" aria-label="Toggle Music">
+                        <img src="assets/images/ui/music-icon.png" alt="Music">
+                    </button>
+                    <button id="effects-toggle" class="audio-button" aria-label="Toggle Sound Effects">
+                        <img src="assets/images/ui/effects-icon.png" alt="Sound Effects">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- World Map Screen -->
+        <div id="world-map-screen" class="screen hidden">
+            <div class="screen-header">
+                <button class="back-button" aria-label="Back to home">
+                    <img src="assets/images/ui/back-arrow.png" alt="Back">
+                </button>
+                <h2>Choose a World</h2>
+                <div class="player-info">
+                    <span class="player-name"></span>
+                    <div class="player-stars">
+                        <img src="assets/images/ui/star.png" alt="Stars" class="star-icon">
+                        <span class="star-count">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="worlds-container">
+                <!-- World 1: Counting Cove (Ages 2-3) -->
+                <div class="world" data-world="counting-cove">
+                    <div class="world-icon">
+                        <img src="assets/images/ui/counting-cove-icon.png" alt="Counting Cove">
+                    </div>
+                    <div class="world-info">
+                        <h3>Counting Cove</h3>
+                        <p>Ages 2-3</p>
+                    </div>
+                </div>
+                
+                <!-- World 2: Number Neighborhood (Ages 3-4) -->
+                <div class="world" data-world="number-neighborhood">
+                    <div class="world-icon">
+                        <img src="assets/images/ui/number-neighborhood-icon.png" alt="Number Neighborhood">
+                    </div>
+                    <div class="world-info">
+                        <h3>Number Neighborhood</h3>
+                        <p>Ages 3-4</p>
+                    </div>
+                </div>
+                
+                <!-- World 3: Addition Avenue (Ages 4-5) -->
+                <div class="world" data-world="addition-avenue">
+                    <div class="world-icon">
+                        <img src="assets/images/ui/addition-avenue-icon.png" alt="Addition Avenue">
+                    </div>
+                    <div class="world-info">
+                        <h3>Addition Avenue</h3>
+                        <p>Ages 4-5</p>
+                    </div>
+                </div>
+                
+                <!-- World 4: Subtraction Street (Ages 5-6) -->
+                <div class="world" data-world="subtraction-street">
+                    <div class="world-icon">
+                        <img src="assets/images/ui/subtraction-street-icon.png" alt="Subtraction Street">
+                    </div>
+                    <div class="world-info">
+                        <h3>Subtraction Street</h3>
+                        <p>Ages 5-6</p>
+                    </div>
+                </div>
+                
+                <!-- World 5: Math Mountain (Ages 6-7) -->
+                <div class="world" data-world="math-mountain">
+                    <div class="world-icon">
+                        <img src="assets/images/ui/math-mountain-icon.png" alt="Math Mountain">
+                    </div>
+                    <div class="world-info">
+                        <h3>Math Mountain</h3>
+                        <p>Ages 6-7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level Selection Screen -->
+        <div id="level-selection-screen" class="screen hidden">
+            <div class="screen-header">
+                <button class="back-button" aria-label="Back to world map">
+                    <img src="assets/images/ui/back-arrow.png" alt="Back">
+                </button>
+                <h2 class="world-name">World Name</h2>
+                <div class="player-info">
+                    <span class="player-name"></span>
+                    <div class="player-stars">
+                        <img src="assets/images/ui/star.png" alt="Stars" class="star-icon">
+                        <span class="star-count">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="world-mascot">
+                <!-- World mascot character will be displayed here -->
+            </div>
+            
+            <div class="levels-container">
+                <!-- Levels will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- Activity Screen -->
+        <div id="activity-screen" class="screen hidden">
+            <div class="screen-header">
+                <button class="back-button" aria-label="Back to level selection">
+                    <img src="assets/images/ui/back-arrow.png" alt="Back">
+                </button>
+                <div class="activity-info">
+                    <h3 class="activity-name">Activity Name</h3>
+                    <div class="progress-indicator">
+                        <span class="current-step">1</span>/<span class="total-steps">5</span>
+                    </div>
+                </div>
+                <button class="help-button" aria-label="Help">
+                    <img src="assets/images/ui/help-icon.png" alt="Help">
+                </button>
+            </div>
+            
+            <div class="activity-container">
+                <!-- Activity content will be dynamically generated -->
+            </div>
+            
+            <div class="activity-controls">
+                <div class="character-helper">
+                    <!-- Helper character that provides guidance -->
+                </div>
+                <div class="action-buttons">
+                    <button class="submit-button" disabled>
+                        <img src="assets/images/ui/check-icon.png" alt="" class="button-icon">
+                        <span>Check</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reward Screen -->
+        <div id="reward-screen" class="screen hidden">
+            <div class="reward-content">
+                <h2>Great Job!</h2>
+                <div class="celebration-animation">
+                    <!-- Celebration animation will be displayed here -->
+                </div>
+                <div class="stars-earned">
+                    <!-- Stars will be dynamically generated -->
+                </div>
+                <div class="reward-message">
+                    <p>You completed the level!</p>
+                </div>
+                <div class="reward-buttons">
+                    <button class="next-button primary-button">
+                        <img src="assets/images/ui/next-icon.png" alt="" class="button-icon">
+                        <span>Next</span>
+                    </button>
+                    <button class="replay-button secondary-button">
+                        <img src="assets/images/ui/replay-icon.png" alt="" class="button-icon">
+                        <span>Play Again</span>
+                    </button>
+                    <button class="home-button secondary-button">
+                        <img src="assets/images/ui/home-icon.png" alt="" class="button-icon">
+                        <span>Home</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="settings-screen" class="screen hidden">
+            <div class="screen-header">
+                <button class="back-button" aria-label="Back">
+                    <img src="assets/images/ui/back-arrow.png" alt="Back">
+                </button>
+                <h2>Settings</h2>
+                <div></div> <!-- Empty div for flex alignment -->
+            </div>
+            
+            <div class="settings-container">
+                <div class="setting-group">
+                    <h3>Audio</h3>
+                    <div class="setting-item">
+                        <label for="music-volume">
+                            <img src="assets/images/ui/music-icon.png" alt="Music" id="music-volume-icon" class="setting-icon">
+                            <span>Music</span>
+                        </label>
+                        <input type="range" id="music-volume" min="0" max="100" value="70">
+                    </div>
+                    <div class="setting-item">
+                        <label for="effects-volume">
+                            <img src="assets/images/ui/effects-icon.png" alt="Sound Effects" id="effects-volume-icon" class="setting-icon">
+                            <span>Sound Effects</span>
+                        </label>
+                        <input type="range" id="effects-volume" min="0" max="100" value="100">
+                    </div>
+                    <div class="setting-item">
+                        <label for="narration-volume">
+                            <img src="assets/images/ui/narration-icon.png" alt="Voice Narration" id="narration-volume-icon" class="setting-icon">
+                            <span>Voice Narration</span>
+                        </label>
+                        <input type="range" id="narration-volume" min="0" max="100" value="100">
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>Accessibility</h3>
+                    <div class="setting-item">
+                        <label for="high-contrast">
+                            <img src="assets/images/ui/contrast-icon.png" alt="High Contrast" class="setting-icon">
+                            <span>High Contrast</span>
+                        </label>
+                        <input type="checkbox" id="high-contrast" class="toggle-switch">
+                    </div>
+                    <div class="setting-item">
+                        <label for="text-size">
+                            <img src="assets/images/ui/text-size-icon.png" alt="Text Size" class="setting-icon">
+                            <span>Text Size</span>
+                        </label>
+                        <select id="text-size">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parent Zone Screen -->
+        <div id="parent-zone-screen" class="screen hidden">
+            <div class="parent-gate">
+                <h2>Parent Zone</h2>
+                <p>Please solve this problem to continue:</p>
+                <div class="parent-gate-challenge">
+                    <!-- Parent gate challenge will be dynamically generated -->
+                </div>
+                <input type="text" id="parent-gate-answer" placeholder="Enter your answer">
+                <button id="parent-gate-submit" class="primary-button">Submit</button>
+            </div>
+            
+            <div class="parent-zone-content hidden">
+                <div class="screen-header">
+                    <button class="back-button" aria-label="Back to home">
+                        <img src="assets/images/ui/back-arrow.png" alt="Back">
+                    </button>
+                    <h2>Parent Zone</h2>
+                    <button class="exit-parent-zone" aria-label="Exit to child mode">
+                        <img src="assets/images/ui/exit-icon.png" alt="Exit">
+                    </button>
+                </div>
+                
+                <div class="parent-tabs">
+                    <button class="tab-button active" data-tab="progress">Progress</button>
+                    <button class="tab-button" data-tab="settings">Settings</button>
+                    <button class="tab-button" data-tab="resources">Resources</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div id="progress-tab" class="tab-pane active">
+                        <!-- Progress tracking content -->
+                    </div>
+                    <div id="settings-tab" class="tab-pane">
+                        <!-- Advanced settings content -->
+                    </div>
+                    <div id="resources-tab" class="tab-pane">
+                        <!-- Educational resources content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notifications Container -->
+        <div class="notifications-container"></div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="background-music" loop preload="none"></audio>
+    <audio id="effect-audio" preload="none"></audio>
+    <audio id="narration-audio" preload="none"></audio>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/activities.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
