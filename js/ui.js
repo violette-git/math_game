@@ -52,17 +52,16 @@
             backButtonActivity.addEventListener('click', () => ScreenManager.showScreen('level-selection-screen'));
           }
           this.handleButtonClick('.help-button', () => {
-            const currentActivityData = GameState.getCurrentActivityData();
+            const currentActivityData = GameState.session.activityData;
             const hint = ActivityManager.getHintForActivity(currentActivityData);
             alert(hint); // Basic alert for now, can be improved
           });
           this.handleButtonClick('.submit-button', () => {
-            const currentActivityData = GameState.getCurrentActivityData();
-            const isCorrect = Activities.checkAnswer(currentActivityData); // Assuming Activities object is in activities.js
+            const currentActivityData = GameState.session.activityData;
+            const isCorrect = Activities.checkAnswer(currentActivityData);
             Activities.showFeedback(isCorrect, document.querySelector('.activity-container'));
-            // Handle game progression based on the answer
             setTimeout(() => {
-              const nextActivity = GameState.moveToNextActivity(isCorrect);
+              const nextActivity = GameState.nextActivity();
               if (nextActivity) {
                 UI.loadActivity(nextActivity);
               } else {
@@ -75,7 +74,7 @@
   
         // Reward Screen buttons
         this.handleButtonClick('#reward-screen .next-button', () => {
-          const nextLevel = GameState.moveToNextLevel();
+              const nextLevel = GameState.progress.currentLevel + 1;
           if (nextLevel) {
             ScreenManager.showScreen('level-selection-screen');
             UI.loadLevelSelection(GameState.currentWorldId);
@@ -84,7 +83,7 @@
           }
         });
         this.handleButtonClick('#reward-screen .replay-button', () => {
-          UI.loadLevel(GameState.currentWorldId, GameState.currentLevelIndex);
+            UI.loadLevel(GameState.progress.currentWorld, GameState.progress.currentLevel);
         });
         this.handleButtonClick('#reward-screen .home-button', () => ScreenManager.showScreen('home-screen'));
   
@@ -233,11 +232,11 @@
         if (activityContainer && activityNameHeader && progressIndicator) {
           activityContainer.innerHTML = ''; // Clear previous activity
           activityNameHeader.textContent = activityData.type.toUpperCase(); // Or a more user-friendly name
-          progressIndicator.querySelector('.current-step').textContent = GameState.currentActivityIndex + 1;
-          progressIndicator.querySelector('.total-steps').textContent = GameState.currentLevelData.activities.length;
+          progressIndicator.querySelector('.current-step').textContent = GameState.session.currentActivityIndex + 1;
+          progressIndicator.querySelector('.total-steps').textContent = GameState.session.currentLevelActivities.length;
   
           if (window.Activities && window.Activities.getActivityHandler) {
-            const activityHandler = window.Activities.getActivityHandler(GameState.currentWorldId, activityData.type);
+            const activityHandler = window.Activities.getActivityHandler(GameState.progress.currentWorld, activityData.type);
             if (activityHandler && activityHandler.render) {
               activityHandler.render(activityData, activityContainer);
             } else {

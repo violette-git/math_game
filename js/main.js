@@ -1056,4 +1056,7 @@
   
   // Start the game when DOM is fully loaded
   document.addEventListener('DOMContentLoaded', init);
+  
+  // Expose GameState globally
+  window.GameState = GameState;
 })();
