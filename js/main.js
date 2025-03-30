@@ -265,8 +265,9 @@
       this.session.activityResults = [];
       this.session.currentActivityIndex = 0;
       
-      // Generate activities for this level
-      this.session.currentLevelActivities = GameData.generateActivities(worldId, levelNum);
+      // Access the pre-defined activities for this level
+      // Note: levelNum is 1-based, array index is 0-based
+      this.session.currentLevelActivities = GameData.worlds[worldId].levels[levelNum - 1].activities;
       
       // Set the first activity
       if (this.session.currentLevelActivities.length > 0) {
